@@ -2,6 +2,7 @@
 
 class User {
 
+	protected static $db_table = "users";
 	public $id;
 	public $username;
 	public $password;
@@ -105,11 +106,18 @@ class User {
 
 	}
 
+	// function detects if user is there it will updates, if not there create the user
+	public function save(){
+
+		return isset($this->id) ? $this->update() : $this->create();
+
+	}
+
 
 	public function create(){
 	global $database;
 
-	$sql = "INSERT INTO users (username, password, first_name, last_name)";
+	$sql = "INSERT INTO " .self::$db_table. " (username, password, first_name, last_name)";
 	$sql .= "VALUES ('";
 	$sql .= $database->escape_string($this->username) . "', '";
 	$sql .= $database->escape_string($this->password) . "', '";
@@ -131,24 +139,38 @@ class User {
 
 	} // end of create method
 
-// update the database of user information
-public function update(){
-	global $database;
+	// update the database of user information
+	public function update(){
+		global $database;
 
-		$sql = "UPDATE users SET ";
-		$sql .= "username= '" . $database->escape_string($this->username)			. "', ";
-		$sql .= "password= '" . $database->escape_string($this->password)			. "', ";
-		$sql .= "first_name= '" . $database->escape_string($this->first_name)	. "', ";
-		$sql .= "last_name= '" . $database->escape_string($this->last_name)		. "' ";
-		$sql .= " WHERE id= " . $database->escape_string($this->id);
-		
+			$sql = "UPDATE " .self::$db_table. " SET ";
+			$sql .= "username= '" . $database->escape_string($this->username)			. "', ";
+			$sql .= "password= '" . $database->escape_string($this->password)			. "', ";
+			$sql .= "first_name= '" . $database->escape_string($this->first_name)	. "', ";
+			$sql .= "last_name= '" . $database->escape_string($this->last_name)		. "' ";
+			$sql .= " WHERE id= " . $database->escape_string($this->id);
+			
+			$database->query($sql);
+
+			// returns true or false depending on the outcome of the query, ternary style! swag...
+			return (mysqli_affected_rows($database->connection) == 1) ? true : false; 
+
+	} // end of update method
+
+	// update the database of user information
+	public function delete(){
+		global $database;
+
+		$sql = "DELETE FROM " .self::$db_table. " ";
+		$sql .= "WHERE id= " . $database->escape_string($this->id);
+		$sql .= " LIMIT 1";
+
 		$database->query($sql);
 
 		// returns true or false depending on the outcome of the query, ternary style! swag...
 		return (mysqli_affected_rows($database->connection) == 1) ? true : false; 
 
 	} // end of update method
-
 
 
 
