@@ -7,14 +7,42 @@ class Session {
 
 	private $signed_in = false;
 	public $user_id;
+	public $message;
+
 
 
 	function __construct(){
 		// starts session
-		session_start();
+		
 		$this->check_the_login();
+		$this->check_message();
 
 	}
+
+	// basically outputs a message to the screen
+	public function message($msg=""){
+		if(!empty($msg)){
+			$_SESSION['message'] = $msg;
+		} else {
+			return $this->message;
+		}
+	}
+
+	// checks if the message has a value in it
+	public function check_message(){
+
+		if(isset($_SESSION['message'])){
+
+			$this->message = $_SESSION['message'];
+			unset($_SESSION['message']);
+		} else {
+
+			$this->message = "";
+		}
+
+
+	}
+
 
 	// Getter function returns true or false if user is signed in...
 	public function is_signed_in(){
