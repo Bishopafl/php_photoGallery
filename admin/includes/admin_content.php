@@ -9,23 +9,25 @@
             </h1>
             
             <?php 
-            
-
             // $user = new User();
 
-            /* $user->username = "Adam the User";
-             * $user->password = "password";
-             * $user->first_name = "Adam";
-             * $user->last_name = "the User";
-             * $user->create();
-            */
+            // $user->username = "superman";
+            // $user->password = "lois";
+            // $user->first_name = "clark";
+            // $user->last_name = "kent";
+            
+            // $user->create();
+            
             
             // Examples below are much, much cleaner than up top... 
             // Just testing the different ways to do things :)
 
              /* update function example */
-            // $user = User::find_user_by_id(7);
-            // $user->first_name = "greatest";
+            // $user = User::find_user_by_id(8);
+            // $user->username = "Boogie man";
+            // $user->password = "bugs";
+            // $user->first_name = "oogie";
+            // $user->last_name = "boogie";
             // $user->update();
             
 
