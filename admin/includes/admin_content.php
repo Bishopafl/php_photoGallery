@@ -49,6 +49,15 @@
             // $user->username = "Noah";
             // $user->save();
 
+            $user = array();
+            $user = User::find_all();
+
+            foreach ($user as $users) {
+                echo $users->username;
+                
+            }
+
+
             ?>
 
 
