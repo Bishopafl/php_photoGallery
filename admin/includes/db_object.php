@@ -1,6 +1,6 @@
 <?php 
 
-
+// parent class that talks to the database
 class Db_object {
 
 	protected static $db_table = "users";
@@ -78,7 +78,7 @@ class Db_object {
 		$properties = array();
 
 		// loops through the associative array and assigns keys and values
-		foreach (self::$db_table_fields as $db_field) {
+		foreach (static::$db_table_fields as $db_field) {
 			if (property_exists($this, $db_field)) {
 				
 				$properties[$db_field] = $this->$db_field;

@@ -46,17 +46,33 @@
 
             /* save function example */
             // $user = new User();
-            // $user->username = "Noah";
+            // $user->username = "Bojangles";
             // $user->save();
 
-            $user = array();
-            $user = User::find_all();
+            /* finds all users by username in database */
+            // $user = array();
+            // $users = User::find_all();
 
-            foreach ($user as $users) {
-                echo $users->username;
-                
-            }
+            // foreach ($users as $user) {
+            //     echo $user->username;
+            // }   
+        //  --------------------------------------------------
+            /* finds all photos by title in database */
+            // $photos = array();
+            // $photos = Photo::find_all();
 
+            // foreach ($photos as $photo) {
+            //     echo $photo->title;
+            // }
+
+            // $photo = new Photo();
+
+            // $photo->title = "the dubs";
+            // $photo->size = 20;
+            
+            // $photo->create(); 
+            
+            echo INCLUDES_PATH;
 
             ?>
 
