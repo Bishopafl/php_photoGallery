@@ -1,5 +1,4 @@
 <?php 
-
 // check if user is logged in or not logged in
 // if user logged in, redirect to admin
 // if not, kick to index
@@ -13,7 +12,7 @@ class Session {
 
 	function __construct(){
 		// starts session
-		
+		session_start();
 		$this->check_the_login();
 		$this->check_message();
 

@@ -8,6 +8,7 @@ if($session->is_signed_in()){
 	// if user signed in redirect to the index
 	redirect("index.php");
 
+
 }
 
 if(isset($_POST['submit'])){
