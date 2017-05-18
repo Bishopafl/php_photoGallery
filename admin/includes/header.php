@@ -1,6 +1,8 @@
 <?php ob_start(); ?>
 <?php require_once("init.php"); ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,4 +32,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
+
+<body>
+    <div id="wrapper">
 </head>

@@ -15,7 +15,7 @@ function classAutoLoader($class){
 		die("This file named {$class}.php was not found homie...");
 	}
 
-} // end of classAutoLoader
+} // end of classAutoLoaderd
 
 function redirect($location){
 	//redirects to location

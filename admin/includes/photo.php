@@ -37,14 +37,12 @@ class Photo extends Db_object {
 	public function set_file($file){
 
 		// check is file is empty, or not a file, or not an array
-		if(empty($file) || !$file || !is_array($file)){
-
+		if(empty($file) || $file = '' || !is_array($file)){
 			//saves string into array created above
 			$this->errors[] = "There was no file uploaded man...";
 			return false;
 
-		} elseif ($file['error'] !=0) {
-
+		} elseif ($file['error'] !=0) { 
 			// if error, save error in error file array
 			$this->errors[] = $this->upload_errors_array[$file['error']];
 			return false;
@@ -61,58 +59,52 @@ class Photo extends Db_object {
 	} // end of set_file function
 
 	public function save(){
-
+		// if photo id is found call update function
 		if($this->photo_id){
 
 			$this->update();
 			
 		} else {
 
+			// if errors array is not empty return false
 			if(!empty($this->errors)){
-
 				return false;
 			}
 
+			// if filename and temp path are empty return false
 			if(empty($this->filename) || empty($this->tmp_path)){
-
+				//custom message saving to errors array
 				$this->errors[] = "the file was not available";
 				return false;
 			}
 
 			$target_path = SITE_ROOT . DS . 'admin' . DS . $this->upload_directory . DS . $this->filename;
 
+			// if target path exists, return our custom string
 			if(file_exists($target_path)){
-				// if target path exists, return our custom string
-				// curly bracets and double quotes show php information
+				
+				// FYI:curly bracets and double quotes show php information
 				$this->errors[] = "The file {$this->filename} already exists";
 				return false;
 			}
 
+			// PHP function takes filename and destination to move file
 			if(move_uploaded_file($this->tmp_path, $target_path)){
-
+				//if it created function works...
 				if($this->create()){
-
+					// unset the temporary path
 					unset($this->tmp_path);
 					return true;
 				}
-
 			} else {
-
+				// if file didn't upload, save custom string to errors array
 				$this->errors[] = "your file directory might not have permissions homie...";
 				return false;
 
 			}
-
-
-
-
-		}
-
-			
+		} // end of error checking else statement... 
 	} // end of save function
-
-
-}
+} // end of photo class
 
 
 
