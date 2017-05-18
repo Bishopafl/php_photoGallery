@@ -1,19 +1,17 @@
 <?php 
-
 // check if user is logged in or not logged in
 // if user logged in, redirect to admin
 // if not, kick to index
 class Session {
 
 	private $signed_in = false;
-	public $user_id;
-	public $message;
-
+	public  $user_id;
+	public  $message;
 
 
 	function __construct(){
 		// starts session
-		
+		session_start();
 		$this->check_the_login();
 		$this->check_message();
 
@@ -49,7 +47,7 @@ class Session {
 
 		return $this->signed_in;
 
-	}
+	} // end is_signed_in function
 
 	// function logs in user if user is there based on session
 	public function login($user){
@@ -60,7 +58,7 @@ class Session {
 			$this->signed_in = true;
 		}
 
-	}
+	} // end login function
 
 	// function logs user out of session, unsets the user id and sets signed in to false
 	public function logout(){
@@ -68,14 +66,14 @@ class Session {
 		unset($this->user_id);
 		$this->signed_in = false;
 
-	}
+	}// end logout function
 
 	// checks if session id is set
-	private function check_the_login(){
+	public function check_the_login(){
 
 		// if user exists in session set user...
 		if(isset($_SESSION['user_id'])){
-
+			// set user_id to the session id
 			$this->user_id = $_SESSION['user_id'];
 			$this->signed_in = true;
 		} else {
@@ -85,9 +83,9 @@ class Session {
 		}
 
 
-	}
+	} // end check_the_login function
 
-}
+} // end Session class
 
 $session = new Session();
 
