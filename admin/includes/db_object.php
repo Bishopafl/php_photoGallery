@@ -1,5 +1,6 @@
 <?php 
 
+
 // parent class that talks to the database
 class Db_object {
 

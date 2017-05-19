@@ -1,5 +1,5 @@
-<div class="container-fluid">
 
+<div class="container-fluid">
     <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
@@ -42,7 +42,7 @@
             // $user->password = "bamp";
             // $user->save();
             
-            
+            // $user = User::verify_user();
 
             /* save function example */
             // $user = new User();
@@ -50,12 +50,12 @@
             // $user->save();
 
             /* finds all users by username in database */
-            // $user = array();
-            // $users = User::find_all();
+            $user = array();
+            $users = User::find_all();
 
-            // foreach ($users as $user) {
-            //     echo $user->username;
-            // }   
+            foreach ($users as $user) {
+                echo $user->username;
+            }   
         //  --------------------------------------------------
             /* finds all photos by title in database */
             // $photos = array();
@@ -88,6 +88,5 @@
         </div>
     </div>
     <!-- /.row -->
-
 </div>
 <!-- /.container-fluid -->
