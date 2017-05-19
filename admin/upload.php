@@ -9,7 +9,6 @@
 	       <?php include("includes/side_nav.php") ?>
 	   <!-- /.navbar-collapse -->
 	</nav>
-
 	<div id="page-wrapper">
 		<div class="container-fluid">
 
