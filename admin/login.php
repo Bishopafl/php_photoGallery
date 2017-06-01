@@ -1,15 +1,7 @@
 <?php require_once("includes/header.php"); ?>
-
+<?php if(!$session->is_signed_in() == '') {redirect("login.php");} ?>
 
 <?php 
-
-if($session->is_signed_in()){
-	
-	// if user signed in redirect to the index
-	redirect("index.php");
-
-}
-
 if(isset($_POST['submit'])){
 
 	// assign username and password from post

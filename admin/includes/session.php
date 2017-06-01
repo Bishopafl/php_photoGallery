@@ -81,10 +81,7 @@ class Session {
 			unset($this->user_id);
 			$this->signed_in = false;
 		}
-
-
 	} // end check_the_login function
-
 } // end Session class
 
 $session = new Session();

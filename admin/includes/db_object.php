@@ -1,6 +1,4 @@
 <?php 
-
-
 // parent class that talks to the database
 class Db_object {
 
@@ -13,14 +11,11 @@ class Db_object {
 	} // end of find_all
 
 
-	public function find_by_id($user_id){
+	public function find_by_id($id){
 		global $database;
-
-		$the_result_array = static::find_by_query("SELECT * FROM " . static::$db_table . " WHERE id = $user_id LIMIT 1");
-		
+		$the_result_array = static::find_by_query("SELECT * FROM " . static::$db_table . " WHERE id = " . $database->escape_string($this->id) . " LIMIT 1");
 		// example of ternary vs. if else statement 
 		return !empty($the_result_array) ? array_shift($the_result_array) : false;
-
 	} // end of find_by_id
 
 	public static function find_by_query($sql){
@@ -117,17 +112,14 @@ class Db_object {
 	// update the database of information
 	public function update(){
 		global $database;
-
+			// clean entered properties 
 			$properties  = $this->clean_properties();
-
+			// define property pairs array
 			$properties_pairs = array();
-
+			// loop through properties to set key and value and store to properties pairs array
 			foreach ($properties as $key => $value) {
-				
 				$properties_pairs[] = "{$key} ='{$value}'";
-
 			}
-
 			$sql = "UPDATE " .static::$db_table. " SET ";
 			$sql .= implode(", ", $properties_pairs);
 			$sql .= " WHERE id= " . $database->escape_string($this->id);
@@ -139,7 +131,7 @@ class Db_object {
 
 	} // end of update method
 
-	// update the database of user information
+	// delete the database of information
 	public function delete(){
 		global $database;
 
@@ -148,31 +140,22 @@ class Db_object {
 		$sql .= " LIMIT 1";
 
 		$database->query($sql);
-
 		// returns true or false depending on the outcome of the query, ternary style! swag...
 		return (mysqli_affected_rows($database->connection) == 1) ? true : false; 
 
-	} /* end of update method */
+	} // end of delete method 
 
 	// cleaning values and assigning them to arrays
 	protected function clean_properties(){
 		global $database;
-
 		$clean_properties = array();
-
 		// loop through properties to pull out keys and values
 		foreach ($this->properties() as $key => $value) {
-			
 			$clean_properties[$key] = $database->escape_string($value);
-
 		}
-
 		return $clean_properties;
-
-	}
-
-
-}
+	} // end of clean_properties
+} // end of Db_object
 
 
 

@@ -50,29 +50,27 @@
             // $user->save();
 
             /* finds all users by username in database */
-            $user = array();
-            $users = User::find_all();
+            // $user = array();
+            // $users = User::find_all();
 
-            foreach ($users as $user) {
-                echo $user->username;
-            }   
+            // foreach ($users as $user) {
+            //     echo $user->username;
+            // }   
         //  --------------------------------------------------
             /* finds all photos by title in database */
-            // $photos = array();
-            // $photos = Photo::find_all();
+            $photos = array();
+            $photos = Photo::find_all();
 
-            // foreach ($photos as $photo) {
-            //     echo $photo->title;
-            // }
+            foreach ($photos as $photo) {
+                echo $photo->title;
+            }
 
             // $photo = new Photo();
-
             // $photo->title = "the dubs";
             // $photo->size = 20;
-            
             // $photo->create(); 
             
-            echo INCLUDES_PATH;
+            
 
             ?>
 

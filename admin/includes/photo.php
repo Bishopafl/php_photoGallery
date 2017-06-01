@@ -1,6 +1,4 @@
 <?php
-
-
 class Photo extends Db_object {
 
 	protected static $db_table = "photos";
@@ -35,25 +33,21 @@ class Photo extends Db_object {
 // This is passing $_FILES['uploaded_file'] as an argument
 
 	public function set_file($file){
-
 		// check is file is empty, or not a file, or not an array
-		if(empty($file) || $file = '' || !is_array($file)){
+		if(empty($file) || $file = ' ' || !is_array($file)){
 			//saves string into array created above
 			$this->errors[] = "There was no file uploaded man...";
 			return false;
-
 		} elseif ($file['error'] !=0) { 
 			// if error, save error in error file array
 			$this->errors[] = $this->upload_errors_array[$file['error']];
 			return false;
-
 		} else {
-
 			$this->filename = basename($file['name']);
-			$this->tmp_path = $file['tmp_name'];
 			$this->type 	 = $file['type'];
+			$this->tmp_path = $file['tmp_name'];
+			$this->error 	 = $file['error'];
 			$this->size 	 = $file['size'];
-
 		}
 
 	} // end of set_file function
@@ -74,7 +68,7 @@ class Photo extends Db_object {
 			// if filename and temp path are empty return false
 			if(empty($this->filename) || empty($this->tmp_path)){
 				//custom message saving to errors array
-				$this->errors[] = "the file was not available";
+				$this->errors[] = "the file is not available";
 				return false;
 			}
 
