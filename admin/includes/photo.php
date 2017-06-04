@@ -31,7 +31,6 @@ class Photo extends Db_object {
 	);
 
 // This is passing $_FILES['uploaded_file'] as an argument
-
 	public function set_file($file){
 
 		if(isset($file)){
@@ -50,6 +49,12 @@ class Photo extends Db_object {
 			return false;
 		}
 	} // end of set_file function
+
+	public function picture_path(){
+		return $this->upload_directory.DS.$this->filename;
+
+	}
+
 
 	public function save(){
 		// if photo id is found call update function
