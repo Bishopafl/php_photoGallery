@@ -33,23 +33,22 @@ class Photo extends Db_object {
 // This is passing $_FILES['uploaded_file'] as an argument
 
 	public function set_file($file){
-		// check is file is empty, or not a file, or not an array
-		if(empty($file) || $file = ' ' || !is_array($file)){
-			//saves string into array created above
-			$this->errors[] = "There was no file uploaded man...";
-			return false;
-		} elseif ($file['error'] !=0) { 
-			// if error, save error in error file array
-			$this->errors[] = $this->upload_errors_array[$file['error']];
-			return false;
-		} else {
+
+		if(isset($file)){
 			$this->filename = basename($file['name']);
 			$this->type 	 = $file['type'];
 			$this->tmp_path = $file['tmp_name'];
 			$this->error 	 = $file['error'];
 			$this->size 	 = $file['size'];
+		} elseif ($file['error'] !=0 ) {
+			// if error, save error in error file array
+			$this->errors[] = $this->upload_errors_array[$file['error']];
+			return false;
+		}elseif (empty($file) || $file = ' ' || !is_array($file)) {
+			//saves string into array created above
+			$this->errors[] = "There was no file uploaded man...";
+			return false;
 		}
-
 	} // end of set_file function
 
 	public function save(){
