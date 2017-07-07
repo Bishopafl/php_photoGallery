@@ -53,7 +53,6 @@ class Photo extends Db_object {
 		return $this->upload_directory.DS.$this->filename;
 	}
 
-
 	public function save(){
 		// if photo id is found call update function
 		if($this->photo_id){

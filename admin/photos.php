@@ -34,11 +34,11 @@
 		            		<tbody>
 									
 									<?php foreach ($photos as $photo) : ?>
-
+									<?php  //echo $photo->photo_id; die; ?>
 
 		            			<tr>
-		            				<td><img src="<?php echo $photo-picture_path() ?>" alt=""></td>
-		            				<td><?php echo $photo->id; ?></td>
+		            				<td><img src="<?php echo $photo->picture_path(); ?>" alt=""></td>
+		            				<td><?php echo $photo->photo_id; ?></td>
 		            				<td><?php echo $photo->filename; ?></td>
 		            				<td><?php echo $photo->title; ?></td>
 		            				<td><?php echo $photo->size; ?></td>
