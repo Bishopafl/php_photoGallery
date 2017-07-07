@@ -9,6 +9,11 @@
             </h1>
             
             <?php 
+
+            $user = User::find_by_id();
+
+            echo $user->username;
+
             // $user = new User();
 
             // $user->username = "superman";
