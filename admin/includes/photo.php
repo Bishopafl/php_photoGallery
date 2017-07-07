@@ -9,7 +9,7 @@ class Photo extends Db_object {
 	public $filename;
 	public $type;
 	public $size;
-	
+
 	// path for images to move them to a temporary path
 	public $tmp_path;
 	// path images will go to.  this is the perminate path
@@ -18,7 +18,6 @@ class Photo extends Db_object {
 	public $errors = array();
 	//errors for uploads 
 	public $upload_errors_array = array(
-
 		UPLOAD_ERR_OK				=> "There is no error",
 		UPLOAD_ERR_INI_SIZE		=> "The uploaded file exceeds the upload_max_filesize directive",
 		UPLOAD_ERR_FORM_SIZE		=> "The uploaded file exceeds the MAX_FILE_SIZE directive",
@@ -33,26 +32,25 @@ class Photo extends Db_object {
 // This is passing $_FILES['uploaded_file'] as an argument
 	public function set_file($file){
 
-		if(isset($file)){
+		if (!isset($file)) {
+			//saves string into array created above
+			$this->errors[] = "There was no file uploaded man...";
+			return false;
+		} elseif ($file['error'] !=0) {
+			// if error, save error in error file array
+			$this->errors[] = $this->upload_errors_array[$file['error']];
+			return false;
+		} elseif (isset($file)) {
 			$this->filename = basename($file['name']);
 			$this->type 	 = $file['type'];
 			$this->tmp_path = $file['tmp_name'];
 			$this->error 	 = $file['error'];
 			$this->size 	 = $file['size'];
-		} elseif ($file['error'] !=0 ) {
-			// if error, save error in error file array
-			$this->errors[] = $this->upload_errors_array[$file['error']];
-			return false;
-		}elseif (empty($file) || $file = ' ' || !is_array($file)) {
-			//saves string into array created above
-			$this->errors[] = "There was no file uploaded man...";
-			return false;
 		}
 	} // end of set_file function
 
 	public function picture_path(){
 		return $this->upload_directory.DS.$this->filename;
-
 	}
 
 

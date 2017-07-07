@@ -11,34 +11,22 @@
 		$photo->title = $_POST['title'];
 		$photo->set_file($_FILES['file_upload']);
 
-		// $photo = new Photo();
-            // $photo->title = "the dubs";
-            // $photo->size = 20;
-            // $photo->create();
-
 		// let's check if the photo saved and display a message!
 		if($photo->save()) {
 			$message = "Photo uploaded successfully";
-		
 		} else {
 			// if photo didn't save, output a message from the errors array
 			$message = join("<br>", $photo->errors);
-
 		}
-
-	}
-
+	} // end of isset statement
 ?>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-   <!-- Brand and toggle get grouped for better mobile display -->
-   
-   <?php include("includes/top_nav.php") ?>
-
-   <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-       <?php include("includes/side_nav.php") ?>
-   <!-- /.navbar-collapse -->
-</nav>
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<?php include("includes/top_nav.php") ?>
+	<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+	<?php include("includes/side_nav.php") ?>
+</nav><!-- /.navbar-collapse -->
 
 <div id="page-wrapper">
 	<div class="container-fluid">

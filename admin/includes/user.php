@@ -3,7 +3,7 @@
 // Class that controls user information
 class User extends Db_object {
 
-	
+	protected static $db_table = "users";
 	protected static $db_table_fields = array('username', 'password', 'first_name', 'last_name');
 	public $id;
 	public $username;
@@ -22,7 +22,6 @@ class User extends Db_object {
 		$sql .= "username = '{$username}' ";
 		$sql .= "AND password = '{$password}' ";
 		$sql .= "LIMIT 1";
-
 
 		$the_result_array = static::find_by_query($sql);
 	
