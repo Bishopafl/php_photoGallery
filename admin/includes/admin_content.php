@@ -10,7 +10,7 @@
             
             <?php 
 
-            $user = User::find_by_id();
+            $user = User::find_by_id(5);
 
             echo $user->username;
 
