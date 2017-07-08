@@ -11,8 +11,7 @@
             <?php 
 
             $user = User::find_by_id(5);
-
-            echo $user->username;
+            echo $user->username . ", You are logged in and ready";
 
             // $user = new User();
 
@@ -63,12 +62,7 @@
             // }   
         //  --------------------------------------------------
             /* finds all photos by title in database */
-            $photos = array();
-            $photos = Photo::find_all();
-
-            foreach ($photos as $photo) {
-                echo $photo->title;
-            }
+            // $photos = array();3
 
             // $photo = new Photo();
             // $photo->title = "the dubs";
