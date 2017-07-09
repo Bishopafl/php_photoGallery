@@ -37,7 +37,7 @@
 									<?php  //echo $photo->id; die; ?>
 
 		            			<tr>
-		            				<td><img src="<?php echo $photo->picture_path(); ?>" alt="">
+		            				<td><img class="admin-photo-thumbnail" src="<?php echo $photo->picture_path(); ?>" alt="">
 											
 											<div class="pictures_link">
 												<!-- will take to a pages -->
