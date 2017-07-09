@@ -10,25 +10,33 @@ class User extends Db_object {
 	public $password;
 	public $first_name;
 	public $last_name;
+	public $user_image;
+	public $upload_directory = "images";
+	public $image_placeholder = "http://placehold.it/400x400&text=image";
 
-		public static function verify_user($username, $password){
-		global $database;
 
-		//sanatizes username and password..
-		$username = $database->escape_string($username);
-		$password = $database->escape_string($password);
+	public function image_path_and_placeholder (){
+		return empty($this->user_image) ? $this->image_placeholder : $this->upload_directory.DS.$this->user_image;
 
-		$sql = "SELECT * FROM ". static::$db_table." WHERE ";
-		$sql .= "username = '{$username}' ";
-		$sql .= "AND password = '{$password}' ";
-		$sql .= "LIMIT 1";
 
-		$the_result_array = static::find_by_query($sql);
-	
-		return !empty($the_result_array) ? array_shift($the_result_array) : false;
+	}
 
+
+	public static function verify_user($username, $password){
+	global $database;
+
+	//sanatizes username and password..
+	$username = $database->escape_string($username);
+	$password = $database->escape_string($password);
+
+	$sql = "SELECT * FROM ". static::$db_table." WHERE ";
+	$sql .= "username = '{$username}' ";
+	$sql .= "AND password = '{$password}' ";
+	$sql .= "LIMIT 1";
+
+	$the_result_array = static::find_by_query($sql);
+
+	return !empty($the_result_array) ? array_shift($the_result_array) : false;
 	} // end of verify_user
-
-
 } // end of user class
 ?>
