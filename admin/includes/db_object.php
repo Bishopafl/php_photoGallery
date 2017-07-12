@@ -17,6 +17,8 @@ class Db_object {
 
 	);
 
+	
+
 	// This is passing $_FILES['uploaded_file'] as an argument
 	public function set_file($file){
 

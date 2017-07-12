@@ -10,7 +10,7 @@
             
             <?php 
 
-            $user = User::find_by_id(5);
+            $user = User::find_by_id(28);
             echo $user->username . ", You are logged in and ready";
 
             // $user = new User();

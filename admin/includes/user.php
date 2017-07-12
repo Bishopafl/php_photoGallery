@@ -4,7 +4,7 @@
 class User extends Db_object {
 
 	protected static $db_table = "users";
-	protected static $db_table_fields = array('username', 'password', 'first_name', 'last_name');
+	protected static $db_table_fields = array('username', 'password', 'first_name', 'last_name', 'user_image');
 	public $id;
 	public $username;
 	public $password;
@@ -19,49 +19,45 @@ class User extends Db_object {
 
 	
 
-	public function save_user_and_image(){
-		// if photo id is found call update function
+	public function upload_photo(){
+		// if errors array is not empty return false
+		if(!empty($this->errors)){
+			return false;
+		}
 
-			// if errors array is not empty return false
-			if(!empty($this->errors)){
-				return false;
-			}
+		// if user_image and temp path are empty return false
+		if(empty($this->user_image) || empty($this->tmp_path)){
+			//custom message saving to errors array
+			$this->errors[] = "the file is not available";
+			return false;
+		}
 
-			// if user_image and temp path are empty return false
-			if(empty($this->user_image) || empty($this->tmp_path)){
-				//custom message saving to errors array
-				$this->errors[] = "the file is not available";
-				return false;
-			}
+		$target_path = SITE_ROOT . DS . 'admin' . DS . $this->upload_directory . DS . $this->user_image;
 
-			$target_path = SITE_ROOT . DS . 'admin' . DS . $this->upload_directory . DS . $this->user_image;
+		// if target path exists, return our custom string
+		if(file_exists($target_path)){
+			
+			// FYI:curly bracets and double quotes show php information
+			$this->errors[] = "The file {$this->user_image} already exists";
+			return false;
+		}
 
-			// if target path exists, return our custom string
-			if(file_exists($target_path)){
-				
-				// FYI:curly bracets and double quotes show php information
-				$this->errors[] = "The file {$this->user_image} already exists";
-				return false;
-			}
+		// PHP function takes user_image and destination to move file
+		if(move_uploaded_file($this->tmp_path, $target_path)){
+				// unset the temporary path
+				unset($this->tmp_path);
+				return true;
+		} else {
+			// if file didn't upload, save custom string to errors array
+			$this->errors[] = "your file directory might not have permissions homie...";
+			return false;
 
-			// PHP function takes user_image and destination to move file
-			if(move_uploaded_file($this->tmp_path, $target_path)){
-				//if it created function works...
-				if($this->create()){
-					// unset the temporary path
-					unset($this->tmp_path);
-					return true;
-				}
-			} else {
-				// if file didn't upload, save custom string to errors array
-				$this->errors[] = "your file directory might not have permissions homie...";
-				return false;
-
-			}
+		}
 	} // end of save function
 
 
 	public function image_path_and_placeholder (){
+
 		return empty($this->user_image) ? $this->image_placeholder : $this->upload_directory.DS.$this->user_image;
 
 

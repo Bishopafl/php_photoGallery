@@ -1,7 +1,9 @@
 <?php include("includes/header.php"); ?>
 <?php if(!$session->is_signed_in() == '') {redirect("login.php");} ?>
 <?php 
-	if (empty($_GET['id'])) { redirect("users.php"); }
+	if (empty($_GET['id'])) { 
+		redirect("users.php"); 
+	}
 
 	$user = User::find_by_id($_GET['id']);
 	
@@ -16,7 +18,7 @@
 				$user->save();
 			} else {
 				$user->set_file($_FILES['user_image']);
-				$user->save_user_and_image();
+				$user->upload_photo();
 				$user->save();
 				redirect("edit_user.php?id{$user->id}");
 			}
@@ -66,7 +68,7 @@
 						</div><!-- /form-group -->
 						<div class="form-group">
 							<a class="btn btn-danger"href="delete_user.php?id=<?php echo $user->id; ?>">Delete</a>
-							<input type="submit" name="update" class="btn btn-primary pull-right" value="Update">
+							<input type="submit" name="update" class="btn btn-primary pull-right" value="update">
 						</div><!-- /form-group -->
 					</div><!-- /.col-md-8d -->
 				</form><!-- /form-->
