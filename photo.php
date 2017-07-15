@@ -5,6 +5,7 @@ require_once("admin/includes/init.php");
 $photo = Photo::find_by_id($_GET['id']);
  echo $photo->title;
 
+
 if (isset($_POST['submit'])) {
     echo "here and working";
 }

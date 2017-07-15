@@ -5,7 +5,7 @@ function classAutoLoader($class){
 	// makes sure everything is lowercase
 	$class = strtolower($class);
 	// checks class in file
-	$the_path = "includes/{$class}.php";
+	$the_path = INCLUDES_PATH."/{$class}.php";
 	if(is_file($the_path) && !class_exists($class)){
 		include $the_path;
 	} else {
