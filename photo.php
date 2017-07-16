@@ -1,13 +1,32 @@
 <?php 
-
+ini_set('error_reporting', E_STRICT);
 require_once("admin/includes/init.php");
-
-$photo = Photo::find_by_id($_GET['id']);
- echo $photo->title;
-
+$date = strtotime('NOW');
+//$photo = Photo::find_by_id($_GET['id']);
+ //echo $photo->title;
+if (!isset($_GET['id'])) {
+    redirect("index.php");
+} 
 
 if (isset($_POST['submit'])) {
-    echo "here and working";
+    $author = trim($_POST['author']);
+    $body = trim($_POST['body']); 
+
+    $photo->id =  $_GET['id'];
+    $timestamp = date("Y-m-d H:i:s",$date);
+    echo $timestamp;
+    die;
+    $new_comment = Comment::create_comment($photo->id, $author, $body, $timestamp);
+
+    if ($new_comment && $new_comment->save()) {
+        redirect("photo.php?id={$photo->id}");
+    } else {
+
+        $message = "There was some problems saving";
+
+        echo $message;
+
+    }
 }
 
 
